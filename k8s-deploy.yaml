@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: deploy-demo
+    labels:
+        app: deploy-demo
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: deploy-demo
+    template:
+        metadata:
+            labels: {app: deploy-demo}
+        spec:
+            containers: [{name: deploy-demo, image: 'containerregistryprismpoc.azurecr.io/mig/deploy-demo:latest'}]
+            imagePullSecrets: [{name: acr-auth}]
